@@ -6,7 +6,7 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
@@ -37,7 +37,7 @@
         <%= link_to "About", about_path %>
       </li>
       <li>
-        <%= link_to "Sign up", new_user_registration_path %>
+        <%= link_to "Sign Up", new_user_registration_path %>
       </li>
       <li>
         <%= link_to "Log in", new_user_session_path %>
