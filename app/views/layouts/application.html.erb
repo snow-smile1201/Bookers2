@@ -13,37 +13,49 @@
 
   <body>
     <header>
-      <% if user_signed_in? %>
-      <li>
-        <!--ユーザー投稿一覧リンク-->
-        <%= link_to "Home", about_path %>
-      </li>
-      <li>
-        <!--全ユーザー投稿一覧リンク-->
-        <%= link_to "Users", about_path %>
-      </li>
-      <li>
-        <!--本の投稿？何が表示されるのかは要検討-->
-        <%= link_to "Books", about_path %>
-      </li>
-      <li>
-        <%= link_to "Log out", destroy_user_session_path, method: :delete %>
-      </li>
-      <% else %>
-      <li>
-        <!--ログイン画面リンク-->
-        <%= link_to "Home", new_user_registration_path %>
-      </li>
-      <li>
-        <%= link_to "About", about_path %>
-      </li>
-      <li>
-        <%= link_to "Sign Up", new_user_registration_path %>
-      </li>
-      <li>
-        <%= link_to "Log in", new_user_session_path %>
-      </li>
-      <% end %>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <div classs="container">
+            <a class="navbar-brand" href="/">
+              <span>Bookers</span>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+              <ul class="navbar ml-auto">
+                <% if user_signed_in? %>
+                <li>
+                  <!--ユーザー投稿一覧リンク-->
+                  <a class="nav-link text-light"><%= link_to "Home", '/' %></a>
+                </li>
+                <li>
+                  <!--全ユーザー投稿一覧リンク-->
+                  <a class="nav-link text-light"><%= link_to "Users", about_path %></a>
+                </li>
+                <li>
+                  <!--本の投稿？何が表示されるのかは要検討-->
+                  <a class="nav-link text-light"><%= link_to "Books", about_path %></a>
+                </li>
+                <li>
+                  <%= link_to "Log out", destroy_user_session_path, method: :delete %>
+                </li>
+                <% else %>
+                <li>
+                  <!--ログイン画面リンク-->
+                  <a class="nav-link text-light"><%= link_to "Home", new_user_registration_path %></a>
+                </li>
+                <li>
+                  <a class="nav-link text-light"><%= link_to "About", about_path %></a>
+                </li>
+                <li>
+                  <a class="nav-link text-light"><%= link_to "Sign Up", new_user_registration_path %></a>
+                </li>
+                <li>
+                  <a class="nav-link text-light"><%= link_to "Log in", new_user_session_path %></a>
+                </li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </nav>
+
     </header>
     <%= yield %>
     <main>
