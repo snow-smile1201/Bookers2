@@ -23,15 +23,15 @@
                 <% if user_signed_in? %>
                 <li>
                   <!--ユーザー投稿一覧リンク-->
-                  <a class="nav-link text-light"><%= link_to "Home", '/' %></a>
+                  <a class="nav-link text-light"><%= link_to "Home", user_path(current_user.id) %></a>
                 </li>
                 <li>
                   <!--全ユーザー投稿一覧リンク-->
-                  <a class="nav-link text-light"><%= link_to "Users", about_path %></a>
+                  <a class="nav-link text-light"><%= link_to "Users", users_path %></a>
                 </li>
                 <li>
                   <!--本の投稿？何が表示されるのかは要検討-->
-                  <a class="nav-link text-light"><%= link_to "Books", about_path %></a>
+                  <a class="nav-link text-light"><%= link_to "Books", books_path %></a>
                 </li>
                 <li>
                   <%= link_to "Log out", destroy_user_session_path, method: :delete %>
@@ -60,7 +60,15 @@
     <%= yield %>
     <main>
     </main>
-
+    <fotter>
+      <div class="container mt-5">
+        <div class="row">
+          <div class="mx-auto">
+            <p>CopyRight Infratop.inc</p>
+          </div>
+        </div>
+      </div>
+    </fotter>
   </body>
 
 </html>
