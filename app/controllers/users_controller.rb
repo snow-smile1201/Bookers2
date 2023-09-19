@@ -2,18 +2,21 @@ class UsersController < ApplicationController
 
   def index
     @user = current_user
-    @books = Book.all
     @users = User.all
-  end
-
-  def create
-
+    @books = Book.all
   end
 
   def show
+    @book = Book.new
     @user = current_user
     @books = @user.books
+  end
 
+  def create
+    @book = Book.new(book_params)
+    @book.user_id = current_user.id
+    @book.save
+    redirect_to book_path(@book.id)
   end
 
   def edit
