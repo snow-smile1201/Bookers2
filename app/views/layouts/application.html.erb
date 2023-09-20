@@ -11,17 +11,18 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body class="d-clex flex-column vh-100">
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-3">
-          <div classs="container-fluid">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+  <body>
+    <header class="container-fluid">
+      <div classs="row px-5 py-2">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-5">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                           aria-controls="navbarNavDropdown" aria-expand="false" aria-label="Toggle navigation">
-              <span class"navbar-toggler-icon"></span>
-            </button>
-            <div class="row">
-              <a class="navbar-brand" href="/"><span>Bookers</span></a>
-              <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <span class"navbar-toggler-icon"></span>
+          </button>
+          <div class="col-2 px-5">
+            <a class="navbar-brand" href="/"><span>Bookers</span></a>
+            </div>
+              <div class="collapse navbar-collapse px-5" id="navbarNavDropdown">
                 <ul class="navbar-nav ml-auto">
                   <% if user_signed_in? %>
                   <li>
@@ -46,7 +47,7 @@
                   </li>
                   <% else %>
                   <li>
-                    <%= link_to(new_user_registration_path, class:"nav-link text-light") do  %>
+                    <%= link_to(top_path, class:"nav-link text-light") do  %>
                     <i class="fa-solid fa-house text-light"></i><span>Home</span>
                     <% end %>
                   </li>
@@ -67,11 +68,9 @@
                   </li>
                   <% end %>
                 </ul>
-              </div>
             </div>
-          </div>
-        </nav>
-
+          </nav>
+        </div>
     </header>
     <main class="container mt-3 px-5">
       <div>
