@@ -1,5 +1,8 @@
+<div class="btn-box col-9 mx-auto">
 <h1>Welcome to Bookers!!</h1>
 <p>In Bookers,<br>you can share and exchange your opinions, inpressions, and emotions<br>about various books!</p>
-
-<a class="nav-link text-light"><%= link_to "Log in", new_user_session_path %></a>
-<a class="nav-link text-light"><%= link_to "Sign Up", new_user_registration_path %></a>
+</div>
+<div class="btn-box col-8 mx-auto">
+  <%= link_to "Log in", new_user_session_path, class:"btn btn-info btn-sm btn-block" %>
+  <%= link_to "Sign Up", new_user_registration_path, class:"btn btn-success btn-sm btn-block" %>
+</div>

@@ -11,53 +11,72 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body class="d-clex flex-column vh-100">
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-          <div classs="container">
-            <a class="navbar-brand" href="/">
-              <span>Bookers</span>
-            </a>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-              <ul class="navbar ml-auto">
-                <% if user_signed_in? %>
-                <li>
-                  <!--ユーザー投稿一覧リンク-->
-                  <a class="nav-link text-light"><%= link_to "Home", user_path(current_user.id) %></a>
-                </li>
-                <li>
-                  <!--全ユーザー投稿一覧リンク-->
-                  <a class="nav-link text-light"><%= link_to "Users", users_path %></a>
-                </li>
-                <li>
-                  <!--本の投稿？何が表示されるのかは要検討-->
-                  <a class="nav-link text-light"><%= link_to "Books", books_path %></a>
-                </li>
-                <li>
-                  <%= link_to "Log out", destroy_user_session_path, method: :delete %>
-                </li>
-                <% else %>
-                <li>
-                  <!--ログイン画面リンク-->
-                  <a class="nav-link text-light"><%= link_to "Home", new_user_registration_path %></a>
-                </li>
-                <li>
-                  <a class="nav-link text-light"><%= link_to "About", about_path %></a>
-                </li>
-                <li>
-                  <a class="nav-link text-light"><%= link_to "Sign Up", new_user_registration_path %></a>
-                </li>
-                <li>
-                  <a class="nav-link text-light"><%= link_to "Log in", new_user_session_path %></a>
-                </li>
-                <% end %>
-              </ul>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-3">
+          <div classs="container-fluid">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                          aria-controls="navbarNavDropdown" aria-expand="false" aria-label="Toggle navigation">
+              <span class"navbar-toggler-icon"></span>
+            </button>
+            <div class="row">
+              <a class="navbar-brand" href="/"><span>Bookers</span></a>
+              <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav ml-auto">
+                  <% if user_signed_in? %>
+                  <li>
+                    <%= link_to(user_path(current_user.id), class:"nav-link text-light") do %>
+                     <i class="fa-solid fa-house"></i><span>Home</span>
+                     <% end %>
+                  </li>
+                  <li>
+                    <%= link_to(users_path, class:"nav-link text-light") do %>
+                    <i class="fa-solid fa-users"></i><span>Users</span>
+                    <% end %>
+                  </li>
+                  <li>
+                    <%= link_to(books_path, class:"nav-link text-light") do %>
+                    <i class="fa-solid fa-book-open"></i><span>Books</span>
+                    <% end %>
+                  </li>
+                  <li>
+                    <%= link_to(destroy_user_session_path, method: :delete, class:"nav-link text-light") do %>
+                    <i class="fa-solid fa-right-from-bracket"></i><span>Log out</span>
+                    <% end %>
+                  </li>
+                  <% else %>
+                  <li>
+                    <%= link_to(new_user_registration_path, class:"nav-link text-light") do  %>
+                    <i class="fa-solid fa-house text-light"></i><span>Home</span>
+                    <% end %>
+                  </li>
+                  <li>
+                    <%= link_to(about_path, class:"nav-link text-light") do %>
+                    <i class="fa-solid fa-link"></i><span>About</span>
+                    <% end %>
+                  </li>
+                  <li>
+                    <%= link_to(new_user_registration_path, class:"nav-link text-light") do %>
+                    <i class="fa-solid fa-user-plus"></i><span>Sign Up</span>
+                    <% end %>
+                  </li>
+                  <li>
+                    <%= link_to(new_user_session_path, class:"nav-link text-light") do %>
+                    <i class="fa-solid fa-right-to-bracket"></i><span>Log in</span>
+                    <% end %>
+                  </li>
+                  <% end %>
+                </ul>
+              </div>
             </div>
           </div>
         </nav>
 
     </header>
     <main class="container mt-3 px-5">
+      <div>
+        <%= flash[:notice] %>
+      </div>
       <%= yield %>
     </main>
     <fotter>

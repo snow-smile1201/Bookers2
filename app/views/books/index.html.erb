@@ -1,5 +1,14 @@
+ <% if @newbook.errors.any? %>
+    <h3><%= @newbook.errors.count %>errors prohibited from being saved:</h3>
+    <ul>
+      <% @newbook.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
   <div class="row">
-    <%= render 'list', user: @user, book: @book %>
+    <%= render 'list', user: @user, book: @newbook %>
     <div class="col-md-8 offset-md-1">
       <h2>Books</h2>
       <table class="table">

@@ -17,6 +17,7 @@
           </tr>
         </tbody>
       </table>
+      <i class="fa-solid fa-user-gear"></i>
       <%= link_to "Edit", edit_user_path(current_user.id) %>
 
       <h2>New Book</h2>
@@ -30,8 +31,6 @@
           <label>Opinion</label>
         <div><%= f.text_area :body %></div>
         </div>
-        <div>
-          <%= f.submit 'Create Book' %>
-        </div>
+        <%= f.submit 'Create Book', class: "btn btn-success" %>
       <% end %>
     </div>
