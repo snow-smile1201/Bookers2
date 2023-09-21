@@ -22,7 +22,7 @@ class BooksController < ApplicationController
        flash[:notice] = "Book wad successfully created!"
        redirect_to book_path(@newbook.id)
     else
-      render :index
+      render :show
     end
   end
 
