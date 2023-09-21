@@ -15,7 +15,7 @@ class BooksController < ApplicationController
 
   def create
     @user = current_user
-    @books = @user.books
+    @books = Book.all
     @newbook = Book.new(book_params)
     @newbook.user_id = current_user.id
     if @newbook.save
