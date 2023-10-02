@@ -1,21 +1,19 @@
-<h1>User info</h1>
-<% if @user.errors.any? %>
-  <h3><%= @user.errors.count %>errors prohibited from being saved:</h3>
-  <ul>
-    <% @user.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </ul>
-<% end %>
-
-<%= form_with model: @user do |f| %>
-  <p>Name</p>
-  <%= f.text_field :name %>
-  <p>Image</p>
-  <%= f.file_field :profile_image, accept: "image/jpeg" %>
-  <p>Introduction</p>
-  <%= f.text_area :introduction %>
-  <div>
-    <%= f.submit 'Update User',class:"btn btn-secondary" %>
+  <div class="container px-5 px-sm-0">
+    <%= render 'layouts/error_msg', obj: @user %>
+    <div class="row">
+      <div class="col">
+        <h1>User info</h1>
+        <%= form_with model: @user do |f| %>
+          <p>Name</p>
+          <%= f.text_field :name %>
+          <p>Image</p>
+          <%= f.file_field :profile_image, accept: "image/jpeg" %>
+          <p>Introduction</p>
+          <%= f.text_area :introduction %>
+          <div>
+            <%= f.submit 'Update User',class:"btn btn-secondary" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
   </div>
-<% end %>

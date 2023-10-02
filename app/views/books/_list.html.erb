@@ -1,5 +1,4 @@
-<div class="col-md-3">
-      <h2>User info</h2>
+
       <%= image_tag user.get_profile_image(100, 100) %>
       <table class="table">
         <tbody>
@@ -23,17 +22,3 @@
         <% end %>
       </div>
 
-      <h2>New book</h2>
-
-      <%= form_with model: book, local: true do |f| %>
-        <div class="field">
-          <label>Title</label>
-       <div><%= f.text_field :title %></div>
-        </div>
-        <div class="field">
-          <label>Opinion</label>
-        <div><%= f.text_area :body %></div>
-        </div>
-        <%= f.submit 'Create Book', class: "btn btn-success" %>
-      <% end %>
-    </div>

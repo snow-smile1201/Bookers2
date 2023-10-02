@@ -1,26 +1,25 @@
 class BooksController < ApplicationController
   before_action :is_matching_book_author, only: [:edit, :update]
+
   def index
     @user = current_user
     @books = Book.all
-    @newbook = Book.new
+    @book = Book.new
   end
 
   def show
     @user = current_user
     @book = Book.find(params[:id])
-    @profile_user = @book.user
-    @newbook = Book.new
   end
 
   def create
     @user = current_user
     @books = Book.all
-    @newbook = Book.new(book_params)
-    @newbook.user_id = current_user.id
-    if @newbook.save
+    @book = Book.new(book_params)
+    @book.user_id = current_user.id
+    if @book.save
        flash[:notice] = "Book wad successfully created!"
-       redirect_to book_path(@newbook.id)
+       redirect_to book_path(@book.id)
     else
       render :index
     end

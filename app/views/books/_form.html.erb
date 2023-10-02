@@ -1,0 +1,12 @@
+
+  <%= form_with model: book, local: true do |f| %>
+    <div class="field">
+      <label>Title</label>
+    <div><%= f.text_field :title %></div>
+    </div>
+    <div class="field">
+      <label>Opinion</label>
+    <div><%= f.text_area :body %></div>
+    </div>
+    <%= f.submit 'Create Book', class: "btn btn-success" %>
+  <% end %>
