@@ -1,4 +1,5 @@
   <div class="container px-5 px-sm-0">
+    <%= render 'layouts/error_msg', obj: @book_comment %>
     <div class="row">
       <div class="col-md-3">
         <h2>User info</h2>
@@ -21,8 +22,10 @@
                 <%= link_to book_path(@book.id) do %>
                   <%= @book.title %>
                 <% end %>
-                </td>
+              </td>
               <td><%= @book.body %></td>
+              <td><%= render 'favorites/favorite', book: @book%></td>
+              <td>コメント数：<%= @book.book_comments.count %></td>
               <% if @book.user == current_user %>
                 <td><%= link_to "Edit", edit_book_path(@book.id), class:"btn btn-success btn-sm btn-block" %></td>
                 <td class><%= link_to "Destroy", book_path(@book.id), method: :delete, "data-confirm" => "Are you sure?", class:"btn btn-danger btn-sm btn-block" %></td>
@@ -30,6 +33,8 @@
             </tr>
         </tbody>
       </table>
+      <%= render 'book_comments/comment_table',book: @book %>
+      <%= render 'book_comments/comment_form',book: @book, book_comment: @book_comment %>
       </div>
     </div>
   </div>
