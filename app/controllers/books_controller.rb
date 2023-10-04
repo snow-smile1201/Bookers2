@@ -2,24 +2,23 @@ class BooksController < ApplicationController
   before_action :is_matching_book_author, only: [:edit, :update]
 
   def index
-    @user = current_user
-    @books = Book.all
+    to = Time.current.at_end_of_day
+    from = (to - 6.day).at_beginning_of_day
+    @books = Book.includes(:favorites).sort_by { |book| -book.favorites.where(created_at: from...to).count }
     @book = Book.new
   end
 
   def show
-    @user = current_user
     @book = Book.find(params[:id])
     @book_comment = BookComment.new
   end
 
   def create
-    @user = current_user
     @books = Book.all
     @book = Book.new(book_params)
     @book.user_id = current_user.id
     if @book.save
-       flash[:notice] = "Book wad successfully created!"
+       flash[:notice] = "Book was successfully created!"
        redirect_to book_path(@book.id)
     else
       render :index
@@ -27,7 +26,6 @@ class BooksController < ApplicationController
   end
 
   def edit
-    @user = current_user
     @book = Book.find(params[:id])
   end
 
