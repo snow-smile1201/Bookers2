@@ -1,6 +1,6 @@
 <div class="comment_form">
-  <%= form_with model: [book, book_comment] do |f|%>
-    <%= f.text_area :comment, rows: '5', placeholder: "Comments here", class:"w-100" %>
+  <%= form_with model: [book, book_comment], local: false do |f|%>
+    <%= f.text_area :comment, rows: '5', placeholder: "Comments here", class:"w-100", id: "comment_textarea" %>
     <%= f.submit "Comment" %>
   <% end %>
 </div>
