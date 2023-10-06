@@ -1,0 +1,39 @@
+  <div class="container px-5 px-sm-0">
+    <%= render 'layouts/error_msg', obj: @group %>
+    <div class="row">
+      <div class="col-md-3">
+        <h2>User info</h2>
+        <%= render 'books/list', user: current_user %>
+        <h2 class="mt-3">New Book</h2>
+        <%= render 'books/form', book: Book.new %>
+      </div>
+      <div class="col-md-8 offset-md-1">
+        <h2>Group detail</h2>
+        <table class="table">
+          <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Introduction</th>
+            <th>Members</th>
+            <th colspan="3"></th>
+          </tr>
+        <tbody>
+            <tr>
+              <td><%= image_tag @group.get_group_image(100, 100) %></td>
+              <td><%= @group.name %></td>
+              <td><%= @group.introduction %></td>
+              <td>
+                <% @group.users.each do |member| %>
+                  <%= member.name %><br>
+                <% end %>
+              </td>
+              <% if @group.is_owned_by?(current_user) %>
+                <td><%= link_to "Edit", edit_group_path(@group), class:"btn btn-success btn-sm btn-block" %></td>
+              <% elsif @group.includesUser?(current_user) %>
+                <td><%= link_to "Leave this group", group_group_users_path(@group), method: :delete, class: "btn btn-danger btn-sm"%></td>
+              <% else %>
+                <td><%= link_to "Join this group", group_group_users_path(@group), method: :post, class: "btn btn-success btn-sm"%></td>
+              <% end %>
+            </tr>
+        </tbody>
+      </table>
