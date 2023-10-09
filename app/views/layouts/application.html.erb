@@ -76,7 +76,8 @@
     </header>
     <main>
       <div class="d-flex justify-content-center mb-2 mt-2">
-        <%= render "searches/search_form" %><br>
+        <%= render "searches/search_form" %>
+        <%= render "searches/tag_form" %>
       </div>
         <strong><%= flash[:notice] %></strong>
       <%= yield %>
