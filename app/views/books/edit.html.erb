@@ -1,13 +1,20 @@
-  <div class="container px-5 px-sm-0">
+  <div class="container px-5 px-sm-0 md-8">
     <%= render 'layouts/error_msg', obj: @book %>
     <div class="row">
       <div class="col">
         <h2>Editing Book</h2>
         <%= form_with model: @book do |f| %>
-          <p>Title</p>
-          <%= f.text_field :title %>
-          <p>Opinion</p>
-          <%= f.text_area :body%>
+          <div class="form-group">
+            <label>Title</label>
+            <div><%= f.text_field :title %></div>
+          </div>
+          <div class="form-group">
+            <label>Opinion</label>
+            <div><%= f.text_area :body%></div>
+          </div>
+          <div class="form-group mb-3">
+            <%= render "static.rate", book: @book %>
+          </div>
           <div>
             <%= f.submit 'Update Book'%>
           </div>

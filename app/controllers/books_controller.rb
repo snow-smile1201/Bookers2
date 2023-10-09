@@ -4,7 +4,15 @@ class BooksController < ApplicationController
   def index
     to = Time.current.at_end_of_day
     from = (to - 6.day).at_beginning_of_day
-    @books = Book.includes(:favorites).sort_by { |book| -book.favorites.where(created_at: from...to).count }
+    if params[:latest]
+      @books = Book.latest
+    elsif params[:old]
+      @books = Book.old
+    elsif params[:star_count]
+      @books = Book.star_count
+    else
+      @books = Book.includes(:favorites).sort_by { |book| -book.favorites.where(created_at: from...to).count }
+    end
     @book = Book.new
   end
 
@@ -21,7 +29,13 @@ class BooksController < ApplicationController
     @books = Book.all
     @book = Book.new(book_params)
     @book.user_id = current_user.id
+    tag_names = params[:book][:tag_names]
+    
     if @book.save
+      if tag_names.present?
+        tags = tag_names.split("/n").map(&:strip).uniq
+        create_or_update_book_tags(@book, tags)
+      end
        flash[:notice] = "Book was successfully created!"
        redirect_to book_path(@book.id)
     else
@@ -36,6 +50,10 @@ class BooksController < ApplicationController
   def update
     @book = Book.find(params[:id])
     if @book.update(book_params)
+      if tag_names.present?
+        tags = tag_names.split("/n").map(&:strip).uniq
+        create_or_update_book_tags(@book, tags)
+      end
        flash[:notice] = "Book was successfully updated!"
        redirect_to book_path(@book.id)
     else
@@ -53,7 +71,7 @@ class BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:title, :body)
+    params.require(:book).permit(:title, :body, :star)
   end
 
   def user_params
@@ -64,6 +82,18 @@ class BooksController < ApplicationController
     book = Book.find(params[:id])
     unless book.user_id == current_user.id
       redirect_to books_path
+    end
+  end
+  
+  def create_or_update_book_tags(book, tags)
+    book.tags.destroy_all
+    begin
+    tags.each do |tag|
+      tag = Tag.find_or_create_by(name: tag)
+      book.tags << tag
+      rescue ActiveRecord::RecordInvalid
+        false
+      end
     end
   end
 end
