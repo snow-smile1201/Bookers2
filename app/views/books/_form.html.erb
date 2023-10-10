@@ -6,10 +6,11 @@
   </div>
   <div class="field">
     <label>Opinion</label>
-  <div><%= f.text_area :body %></div>
+    <div><%= f.text_area :body %></div>
+  </div>
   <div class="field">
     <label>Tag names</label>
-  <div><%= f.text_area :tag_names, class: 'tag-input form-control', rows: 2 %></div>
+    <div><%= f.text_area :tag_names, class: 'tag-input form-control', rows: 2 %></div>
   </div>
   <% if book.id.nil? %>
     <div class="form-group" id="star">
